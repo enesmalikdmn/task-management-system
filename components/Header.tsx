@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import AdbIcon from '@mui/icons-material/Adb';
 import NotificationsIcon from "@mui/icons-material/Notifications";
