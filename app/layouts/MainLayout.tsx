@@ -31,7 +31,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
         <main className="flex-1 bg-gray-100 overflow-y-auto p-4">{taskList}</main>
 
         {/* Task Details */}
-        <aside className="bg-white border-t md:border-t-0 md:border-l border-gray-200 w-full md:w-80 p-4 overflow-y-auto">
+        <aside className="bg-white border-t md:border-t-0 md:border-l border-gray-200 w-full md:w-[25rem] p-4 overflow-y-auto">
           {taskDetails}
         </aside>
       </div>
