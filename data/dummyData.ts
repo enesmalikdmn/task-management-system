@@ -81,7 +81,7 @@ export const taskList: Task[] = [
   {
     id: "task-005",
     name: "Integrate CI/CD pipeline",
-    description: "Setup GitHub Actions for automated testing and deployment.",
+    description: "Setup GitHub Actions for automated testing and deployment.etup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deployment",
     taskNumber: 105,
     storyPoint: 8,
     workflowStatus: "open",
