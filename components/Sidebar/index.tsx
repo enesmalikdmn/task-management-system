@@ -1,5 +1,5 @@
-import React from "react";
-import { List, ListItemIcon, ListItemText, Divider } from "@mui/material";
+import React, { ReactNode } from "react";
+import { List, Divider } from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import AssignmentIcon from "@mui/icons-material/Assignment";
@@ -12,14 +12,21 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CodeIcon from '@mui/icons-material/Code';
 import SecurityIcon from "@mui/icons-material/Security";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import SidebarItem from "./SidebarItem";
+
+export interface SidebarItemProps {
+  label: string;
+  icon: ReactNode;
+}
+
 
 const sidebarItems = [
   {
     section: "Planning",
     items: [
-      { label: "Summary", icon: <LanguageIcon />, new: true },
+      { label: "Summary", icon: <LanguageIcon />, },
       { label: "Timeline", icon: <TimelineIcon /> },
-      { label: "Backlog", icon: <AssignmentIcon />, selected: true },
+      { label: "Backlog", icon: <AssignmentIcon />, },
       { label: "Board", icon: <ListIcon /> },
       { label: "Calendar", icon: <CalendarTodayIcon /> },
       { label: "List", icon: <ListIcon /> },
@@ -51,10 +58,10 @@ const Sidebar: React.FC = () => {
           <h3 className="font-bold">{section.section}</h3>
           <List className="flex flex-col gap-3">
             {section.items.map((item, itemIndex) => (
-              <div key={itemIndex} className="flex items-center cursor-pointer">
-                <ListItemIcon className="sidebar-icons">{item.icon}</ListItemIcon>
-                <ListItemText primary={item.label} />
-              </div>
+              <SidebarItem
+                key={itemIndex}
+                item={item}
+              ></SidebarItem>
             ))}
           </List>
           <Divider />
