@@ -42,6 +42,8 @@ export const taskList: Task[] = [
     storyPoint: 3,
     workflowStatus: "open",
     assignedTo: "john_doe",
+    startDate: '2024-12-01',
+    endDate: '2024-12-05'
   },
   {
     id: "task-002",
@@ -51,6 +53,8 @@ export const taskList: Task[] = [
     storyPoint: 5,
     workflowStatus: "in progress",
     assignedTo: "jane_smith",
+    startDate: '2024-12-11',
+    endDate: '2024-12-15'
   },
   {
     id: "task-003",
@@ -60,6 +64,8 @@ export const taskList: Task[] = [
     storyPoint: 8,
     workflowStatus: "in review",
     assignedTo: "mike_jordan",
+    startDate: '2024-12-16',
+    endDate: '2024-12-18'
   },
   {
     id: "task-004",
@@ -69,6 +75,8 @@ export const taskList: Task[] = [
     storyPoint: 5,
     workflowStatus: "done",
     assignedTo: "lisa_ray",
+    startDate: '2024-12-19',
+    endDate: '2024-12-22'
   },
   {
     id: "task-005",
@@ -78,5 +86,7 @@ export const taskList: Task[] = [
     storyPoint: 8,
     workflowStatus: "open",
     assignedTo: "david_lee",
+    startDate: '2024-12-23',
+    endDate: '2024-12-27'
   },
 ];

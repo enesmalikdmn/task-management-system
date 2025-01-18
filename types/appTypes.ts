@@ -12,6 +12,8 @@ export interface User {
     taskNumber: number;
     storyPoint: number;
     workflowStatus: "open" | "in progress" | "in review" | "done";
-    assignedTo: string; // Kullanıcı adı (username) ile eşleştirilir
+    assignedTo: string;
+    startDate: string;
+    endDate: string;
   }
   

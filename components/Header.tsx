@@ -1,36 +1,38 @@
-'use client'
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import AdbIcon from '@mui/icons-material/Adb';
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import SettingsIcon from "@mui/icons-material/Settings";
-import Avatar from "@mui/material/Avatar";
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import SettingsIcon from '@mui/icons-material/Settings';
+import Avatar from '@mui/material/Avatar';
 
 export default function Header() {
-    const [headerTitles] = useState([
-        'Your Work', 
-        'Projects', 
-        'Filters', 
-        'Dashboards', 
-        'Teams', 
-        'Apps'
-      ]);
+  const [headerTitles] = useState([
+    'Your Work',
+    'Projects',
+    'Filters',
+    'Dashboards',
+    'Teams',
+    'Apps',
+  ]);
   return (
     <header className="flex items-center justify-between px-4 py-2 shadow-md">
-      {/* Left: Icon and Logo */}
       <div className="flex items-center gap-4">
         <AdbIcon />
         <span className="text-lg font-bold">EMD</span>
       </div>
 
-      {/* Center: Navigation */}
       <nav className="hidden md:flex gap-8">
         {headerTitles.map((title, index) => (
-            <span key={index} className="font-semibold hover:text-blue-400 cursor-pointer">{title}</span>
+          <span
+            key={index}
+            className="font-semibold hover:text-blue-400 cursor-pointer"
+          >
+            {title}
+          </span>
         ))}
       </nav>
 
-      {/* Right: Icons and Avatar */}
       <div className="flex items-center gap-4">
         <NotificationsIcon className="cursor-pointer" />
         <SettingsIcon className="cursor-pointer" />
