@@ -1,3 +1,5 @@
+'use client';
+
 import TaskListHeader from "./TaskListHeader";
 import TaskFilterArea from "./TaskFilterArea";
 import TaskListArea from "./TaskListArea";
