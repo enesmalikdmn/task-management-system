@@ -1,12 +1,20 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import AdbIcon from '@mui/icons-material/Adb';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 
 export default function Header() {
+    const [headerTitles] = useState([
+        'Your Work', 
+        'Projects', 
+        'Filters', 
+        'Dashboards', 
+        'Teams', 
+        'Apps'
+      ]);
   return (
     <header className="flex items-center justify-between px-4 py-2 shadow-md">
       {/* Left: Icon and Logo */}
@@ -17,8 +25,9 @@ export default function Header() {
 
       {/* Center: Navigation */}
       <nav className="hidden md:flex gap-8">
-        <span className="font-semibold hover:text-blue-400 cursor-pointer">Project</span>
-        <span className="font-semibold hover:text-blue-400 cursor-pointer">Teams</span>
+        {headerTitles.map((title, index) => (
+            <span key={index} className="font-semibold hover:text-blue-400 cursor-pointer">{title}</span>
+        ))}
       </nav>
 
       {/* Right: Icons and Avatar */}
