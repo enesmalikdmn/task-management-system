@@ -6,8 +6,10 @@ import { userList, taskList } from '../data/dummyData';
 interface AppState {
   users: User[];
   tasks: Task[];
+  focusedTask: Task | null;
   setUsers: (users: User[]) => void;
   setTasks: (tasks: Task[]) => void;
+  setFocusedTask: (task: Task | null) => void;
   addTask: (task: Task) => void;
   updateTask: (taskId: string, updatedTask: Task) => void;
   updateTaskOrder: (taskId: string, overId: string) => void;
@@ -19,14 +21,20 @@ export const useAppStore = create<AppState>()(
     (set) => ({
       users: userList,
       tasks: [],
+      focusedTask: taskList[0],
       setUsers: (users) => set(() => ({ users })),
       setTasks: (tasks) => set(() => ({ tasks })),
+      setFocusedTask: (task) => set(() => ({ focusedTask: task })),
       addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
       updateTask: (taskId: string, updatedTask: Task) =>
         set((state) => ({
           tasks: state.tasks.map((task) =>
             task.id === taskId ? { ...task, ...updatedTask } : task
           ),
+          focusedTask:
+            state.focusedTask?.id === taskId
+              ? { ...state.focusedTask, ...updatedTask }
+              : state.focusedTask,
         })),
       updateTaskOrder: (taskId: string, overId: string) =>
         set((state) => {

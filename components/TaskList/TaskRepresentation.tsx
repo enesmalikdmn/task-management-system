@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { TextField, Menu } from '@mui/material';
 import { useState } from 'react';
 import { userList } from '@/data/dummyData';
-import  { useAppStore } from '@/store/appStore';
+import { useAppStore } from '@/store/appStore';
 
 export default function TaskRepresentation({
   task,
@@ -21,7 +21,7 @@ export default function TaskRepresentation({
     endDate: string;
   };
 }) {
-  const { updateTask } = useAppStore();
+  const { updateTask, setFocusedTask } = useAppStore();
   const [taskName, setTaskName] = useState(task.name);
   const [isEditing, setIsEditing] = useState(false);
   const [anchorElStatus, setAnchorElStatus] = useState<HTMLElement | null>(
@@ -41,8 +41,6 @@ export default function TaskRepresentation({
 
   const handleTaskName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTaskName(event.target.value);
-    const updatedTask = { ...task, name: event.target.value };
-    updateTask(task.id, updatedTask);
   };
 
   const handleTaskStoryPoint = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +54,8 @@ export default function TaskRepresentation({
   };
 
   const handleBlur = () => {
+    const updatedTask = { ...task, name: taskName };
+    updateTask(task.id, updatedTask);
     setIsEditing(false);
   };
 
@@ -66,11 +66,17 @@ export default function TaskRepresentation({
   const handleOpenUserList = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUserList(event.currentTarget);
   };
+    
 
   return (
-    <div className="flex flex-col pl-8 sm:flex-row justify-between items-start sm:items-center p-4 border border-gray-300 rounded-lg bg-white overflow-hidden shadow-lg">
+    <div
+      onClick={() =>setFocusedTask(task)}
+      className="flex flex-col pl-8 sm:flex-row justify-between items-start sm:items-center p-4 border border-gray-300 rounded-lg bg-white overflow-hidden shadow-lg"
+    >
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
-        <div className="font-bold text-gray-700 shrink-0">Task-{task.taskNumber}</div>
+        <div className="font-bold text-gray-700 shrink-0">
+          Task-{task.taskNumber}
+        </div>
         {isEditing ? (
           <TextField
             value={taskName}
