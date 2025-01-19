@@ -170,7 +170,7 @@ export default function TaskRepresentation({
         <Avatar
           className="!w-8 !h-8 shrink-0"
           alt={task.assignedTo}
-          src={task.assignedTo}
+          src={`/images/users/${task.assignedTo}.jpg`}
           onClick={(event) => handleOpenUserList(event)}
         />
         <Menu

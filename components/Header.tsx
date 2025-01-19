@@ -38,7 +38,7 @@ export default function Header() {
         <SettingsIcon className="cursor-pointer" />
         <Avatar
           alt="Enes Malik Duman"
-          src="/static/images/avatar/1.jpg"
+          src="/images/users/john_doe.jpg"
           sx={{ width: 32, height: 32 }}
         />
       </div>
