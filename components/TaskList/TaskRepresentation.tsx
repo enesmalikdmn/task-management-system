@@ -192,8 +192,8 @@ export default function TaskRepresentation({
                 <Avatar
                   className="!w-8 !h-8 shrink-0"
                   alt={user.username}
-                  src={user.username}
-                ></Avatar>
+                  src={`/images/users/${user.username}.jpg`}
+                  ></Avatar>
                 <div>{user.username}</div>
               </div>
             ))}
