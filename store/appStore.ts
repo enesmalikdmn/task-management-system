@@ -21,7 +21,7 @@ export const useAppStore = create<AppState>()(
     (set) => ({
       users: userList,
       tasks: [],
-      focusedTask: taskList[0],
+      focusedTask: null,
       setUsers: (users) => set(() => ({ users })),
       setTasks: (tasks) => set(() => ({ tasks })),
       setFocusedTask: (task) => set(() => ({ focusedTask: task })),
@@ -63,6 +63,7 @@ export const useAppStore = create<AppState>()(
       partialize: (state) => ({ tasks: state.tasks, users: state.users }),
       merge: (persistedState, currentState) => ({
         ...currentState,
+        focusedTask: persistedState?.tasks[0] || null,
         tasks: persistedState?.tasks || taskList,
         users: persistedState?.users || userList,
       }),
