@@ -1,4 +1,5 @@
 import { User, Task } from "../types/appTypes";
+import { v4 as uuidv4 } from "uuid";
 
 export const userList: User[] = [
   {
@@ -35,7 +36,7 @@ export const userList: User[] = [
 
 export const taskList: Task[] = [
   {
-    id: "task-001",
+    id: uuidv4(),
     name: "Setup project structure",
     description: "Create the basic structure of the project using Next.js.",
     taskNumber: 101,
@@ -46,7 +47,7 @@ export const taskList: Task[] = [
     endDate: '2024-12-05'
   },
   {
-    id: "task-002",
+    id: uuidv4(),
     name: "Design login page",
     description: "Create a responsive login page with validation.",
     taskNumber: 102,
@@ -57,7 +58,7 @@ export const taskList: Task[] = [
     endDate: '2024-12-15'
   },
   {
-    id: "task-003",
+    id: uuidv4(),
     name: "Implement authentication",
     description: "Setup JWT-based authentication for the application.",
     taskNumber: 103,
@@ -68,7 +69,7 @@ export const taskList: Task[] = [
     endDate: '2024-12-18'
   },
   {
-    id: "task-004",
+    id: uuidv4(),
     name: "Write unit tests",
     description: "Ensure 80% code coverage for the login feature.",
     taskNumber: 104,
@@ -79,9 +80,9 @@ export const taskList: Task[] = [
     endDate: '2024-12-22'
   },
   {
-    id: "task-005",
+    id: uuidv4(),
     name: "Integrate CI/CD pipeline",
-    description: "Setup GitHub Actions for automated testing and deployment.etup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deploymentetup GitHub Actions for automated testing and deployment",
+    description: "Setup GitHub Actions for automated testing and deployment.",
     taskNumber: 105,
     storyPoint: 8,
     workflowStatus: "open",

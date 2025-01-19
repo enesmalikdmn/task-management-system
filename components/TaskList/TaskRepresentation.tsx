@@ -13,6 +13,8 @@ export default function TaskRepresentation({
     id: string;
     name: string;
     workflowStatus: string;
+    description: string;
+    taskNumber: number;
     storyPoint: number;
     assignedTo: string;
     startDate: string;
@@ -68,7 +70,7 @@ export default function TaskRepresentation({
   return (
     <div className="flex flex-col pl-8 sm:flex-row justify-between items-start sm:items-center p-4 border border-gray-300 rounded-lg bg-white overflow-hidden shadow-lg">
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
-        <div className="font-bold text-gray-700 shrink-0">{task.id}</div>
+        <div className="font-bold text-gray-700 shrink-0">Task-{task.taskNumber}</div>
         {isEditing ? (
           <TextField
             value={taskName}
