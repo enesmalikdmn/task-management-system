@@ -1,5 +1,6 @@
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import TaskRepresentation from './TaskRepresentation';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 export default function DraggableDroppableTask({
   task,
@@ -10,6 +11,8 @@ export default function DraggableDroppableTask({
     workflowStatus: string;
     storyPoint: number;
     assignedTo: string;
+    startDate: string;
+    endDate: string;
   };
 }) {
   const {
@@ -30,9 +33,12 @@ export default function DraggableDroppableTask({
         draggableRef(node);
         droppableRef(node);
       }}
-      {...listeners}
       {...attributes}
+      className='relative'
     >
+      <div className='absolute flex items-center top-5 left-0' {...listeners}>
+        <DragIndicatorIcon />
+      </div>
       <TaskRepresentation task={task} />
     </div>
   );
