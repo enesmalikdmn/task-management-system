@@ -1,3 +1,5 @@
+'use client';
+
 import TaskManagementView from "@/app/views/TaskManagementView";
 
 export default function Home() {

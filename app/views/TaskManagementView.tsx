@@ -1,3 +1,5 @@
+'use client';
+
 import MainLayout from "../layouts/MainLayout";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";

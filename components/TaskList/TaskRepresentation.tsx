@@ -4,6 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { TextField, Menu } from '@mui/material';
 import { useState } from 'react';
 import { userList } from '@/data/dummyData';
+import  { useAppStore } from '@/store/appStore';
 
 export default function TaskRepresentation({
   task,
@@ -18,6 +19,7 @@ export default function TaskRepresentation({
     endDate: string;
   };
 }) {
+  const { updateTask } = useAppStore();
   const [taskName, setTaskName] = useState(task.name);
   const [isEditing, setIsEditing] = useState(false);
   const [anchorElStatus, setAnchorElStatus] = useState<HTMLElement | null>(
@@ -37,12 +39,14 @@ export default function TaskRepresentation({
 
   const handleTaskName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTaskName(event.target.value);
-    task.name = event.target.value;
+    const updatedTask = { ...task, name: event.target.value };
+    updateTask(task.id, updatedTask);
   };
 
   const handleTaskStoryPoint = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTaskStoryPoint(Number(event.target.value));
-    task.storyPoint = Number(event.target.value);
+    const updatedTask = { ...task, storyPoint: Number(event.target.value) };
+    updateTask(task.id, updatedTask);
   };
 
   const handleClick = () => {
@@ -114,7 +118,8 @@ export default function TaskRepresentation({
                 key={index}
                 className="w-24 cursor-pointer flex justify-center px-2 py-1 rounded text-sm font-bold bg-[#e9f2ff] text-[#0052cc] shrink-0"
                 onClick={() => {
-                  task.workflowStatus = status;
+                  const updatedTask = { ...task, workflowStatus: status };
+                  updateTask(task.id, updatedTask);
                   setAnchorElStatus(null);
                 }}
               >
@@ -168,7 +173,8 @@ export default function TaskRepresentation({
             {userList.map((user, index) => (
               <div
                 onClick={() => {
-                  task.assignedTo = user.username;
+                  const updatedTask = { ...task, assignedTo: user.username };
+                  updateTask(task.id, updatedTask);
                   setAnchorElUserList(null);
                 }}
                 key={index}
