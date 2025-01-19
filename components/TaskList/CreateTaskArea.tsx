@@ -15,7 +15,8 @@ export default function CreateTaskArea() {
   const createNewTask = (taskName: string) => {
     setIsCreateTaskFieldOpen(false);
     setTaskName('');
-    const nextTaskNumber = 101 + filteredTasks.length;
+    const maxTaskNumber = Math.max(...filteredTasks.map((task) => task.taskNumber));
+    const nextTaskNumber = maxTaskNumber + 1;
     const newTask = {
       id: uuidv4(),
       name: taskName,
