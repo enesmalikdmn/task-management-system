@@ -12,7 +12,7 @@ import TaskRepresentation from './TaskRepresentation';
 import CreateTaskArea from './CreateTaskArea';
 
 export default function TaskListArea() {
-  const { tasks: taskList, updateTaskOrder } = useAppStore();
+  const { filteredTasks: taskList, updateTaskOrder } = useAppStore();
   const [activeTask, setActiveTask] = useState<null | typeof taskList[0]>(null);
 
   const handleDragEnd = (event: DragEndEvent) => {

@@ -3,11 +3,13 @@
 import { useState } from 'react';
 import { TextField } from '@mui/material';
 import { userList } from '@/data/dummyData';
-
+import { useAppStore } from '@/store/appStore';
 import { Avatar, Menu, List, ListItem, ListItemText } from '@mui/material';
 import { User } from '../../types/appTypes';
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 
 export default function TaskFilterArea() {
+  const { filteredTasks, tasks } = useAppStore();
   const [search, setSearch] = useState<string>('');
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [remainingUsers, setRemainingUsers] = useState<User[]>([]);
@@ -15,6 +17,8 @@ export default function TaskFilterArea() {
 
   const handleSelectUser = (user: User) => {
     setSelectedUser(user);
+    const newList = filteredTasks.filter((task) => task.assignedTo === user.username);
+    useAppStore.setState({ filteredTasks: newList });
     handleClose();
   };
 
@@ -28,19 +32,42 @@ export default function TaskFilterArea() {
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value === '') {
+      useAppStore.setState({ filteredTasks: tasks });
+      setSearch('');
+      return;
+    }
     setSearch(event.target.value);
   };
 
+  const clearFilters = () => {
+    setSearch('');
+    setSelectedUser(null);
+    useAppStore.setState({ filteredTasks: tasks });
+  };
+
+  const searchKeyword = () => {
+    const newList = filteredTasks.filter((task) => task.name.toLowerCase().includes(search.toLowerCase()));
+    useAppStore.setState({ filteredTasks: newList });
+  };
+
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex w-full items-center gap-8">
       <TextField
         value={search}
         onChange={handleSearchChange}
+        onKeyUp={(event) => {
+            if (event.key === 'Enter') {
+                searchKeyword();
+            }
+        }}
         id="outlined-basic"
         size="small"
         label="Search"
         variant="outlined"
         autoComplete="off"
+        onBlur={searchKeyword}
+        sx={{ width: '30rem' }}
       />
       <div>
         <div className="flex gap-1">
@@ -94,6 +121,10 @@ export default function TaskFilterArea() {
             ))}
           </List>
         </Menu>
+      </div>
+      <div onClick={() => clearFilters()} className='flex w-full items-center justify-end cursor-pointer text-black'>
+        <FilterAltOffIcon />
+        <span className='ml-2'>Clear Filters</span>
       </div>
     </div>
   );

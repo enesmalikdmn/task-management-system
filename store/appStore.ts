@@ -7,6 +7,7 @@ interface AppState {
   users: User[];
   tasks: Task[];
   focusedTask: Task | null;
+  filteredTasks: Task[];
   setUsers: (users: User[]) => void;
   setTasks: (tasks: Task[]) => void;
   setFocusedTask: (task: Task | null) => void;
@@ -22,13 +23,14 @@ export const useAppStore = create<AppState>()(
       users: userList,
       tasks: [],
       focusedTask: null,
+      filteredTasks: [],
       setUsers: (users) => set(() => ({ users })),
       setTasks: (tasks) => set(() => ({ tasks })),
       setFocusedTask: (task) => set(() => ({ focusedTask: task })),
-      addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
+      addTask: (task: Task) => set((state) => ({ filteredTasks: [...state.filteredTasks, task] })),
       updateTask: (taskId: string, updatedTask: Task) =>
         set((state) => ({
-          tasks: state.tasks.map((task) =>
+          filteredTasks: state.filteredTasks.map((task) =>
             task.id === taskId ? { ...task, ...updatedTask } : task
           ),
           focusedTask:
@@ -38,32 +40,33 @@ export const useAppStore = create<AppState>()(
         })),
       updateTaskOrder: (taskId: string, overId: string) =>
         set((state) => {
-          const tasks = [...state.tasks];
-          const sourceIndex = tasks.findIndex((task) => task.id === taskId);
-          const destinationIndex = tasks.findIndex((task) => task.id === overId);
+          const filteredTasks = [...state.filteredTasks];
+          const sourceIndex = filteredTasks.findIndex((task) => task.id === taskId);
+          const destinationIndex = filteredTasks.findIndex((task) => task.id === overId);
 
           if (sourceIndex === -1 || destinationIndex === -1) {
             console.warn('Invalid task or destination ID');
-            return { tasks };
+            return { filteredTasks };
           }
 
-          const [movedTask] = tasks.splice(sourceIndex, 1);
+          const [movedTask] = filteredTasks.splice(sourceIndex, 1);
 
-          tasks.splice(destinationIndex, 0, movedTask);
+          filteredTasks.splice(destinationIndex, 0, movedTask);
 
-          return { tasks };
+          return { filteredTasks };
         }),
       deleteTask: (taskId: string) =>
         set((state) => ({
-          tasks: state.tasks.filter((task) => task.id !== taskId),
+          filteredTasks: state.filteredTasks.filter((task) => task.id !== taskId),
         })),
     }),
     {
       name: 'app-store', // LocalStorage key
-      partialize: (state) => ({ tasks: state.tasks, users: state.users }),
+      partialize: (state) => ({ filteredTasks: state.filteredTasks, users: state.users }),
       merge: (persistedState, currentState) => ({
         ...currentState,
-        focusedTask: persistedState?.tasks[0] || null,
+        focusedTask: persistedState?.tasks[0] || taskList[0],
+        filteredTasks: persistedState?.filteredTasks || taskList,
         tasks: persistedState?.tasks || taskList,
         users: persistedState?.users || userList,
       }),

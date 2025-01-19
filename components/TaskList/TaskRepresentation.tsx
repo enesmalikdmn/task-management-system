@@ -5,6 +5,7 @@ import { TextField, Menu } from '@mui/material';
 import { useState } from 'react';
 import { userList } from '@/data/dummyData';
 import { useAppStore } from '@/store/appStore';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function TaskRepresentation({
   task,
@@ -21,7 +22,7 @@ export default function TaskRepresentation({
     endDate: string;
   };
 }) {
-  const { updateTask, setFocusedTask } = useAppStore();
+  const { updateTask, setFocusedTask, deleteTask } = useAppStore();
   const [taskName, setTaskName] = useState(task.name);
   const [isEditing, setIsEditing] = useState(false);
   const [anchorElStatus, setAnchorElStatus] = useState<HTMLElement | null>(
@@ -198,6 +199,7 @@ export default function TaskRepresentation({
             ))}
           </div>
         </Menu>
+        <DeleteIcon onClick={() => deleteTask(task.id)} />
       </div>
     </div>
   );
