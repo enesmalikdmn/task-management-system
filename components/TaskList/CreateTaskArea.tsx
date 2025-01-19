@@ -3,6 +3,7 @@ import { TextField } from '@mui/material';
 import { useState } from 'react';
 import { useAppStore } from '@/store/appStore';
 import { v4 as uuidv4 } from 'uuid';
+import dayjs from 'dayjs';
 
 export default function CreateTaskArea() {
   const { addTask, filteredTasks } = useAppStore();
@@ -25,7 +26,7 @@ export default function CreateTaskArea() {
       storyPoint: 0,
       workflowStatus: 'open',
       assignedTo: '',
-      startDate: Date.now().toString(),
+      startDate: dayjs().format('DD.MM.YYYY'),
       endDate: '',
     };
     if (taskName) {
