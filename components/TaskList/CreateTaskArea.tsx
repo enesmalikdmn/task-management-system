@@ -47,7 +47,9 @@ export default function CreateTaskArea() {
                         if (event.key === 'Enter') {
                             createNewTask(taskName);
                         }
-                    }}  
+                    }}
+                    onBlur={() => createNewTask(taskName)}
+                    autoFocus
                 />
             </div>
         ): (

@@ -31,6 +31,20 @@ export default function TaskDetails() {
       }
     };
 
+    const handleSaveChanges = () => {
+      if (focusedTask) {
+        const updatedTask = {
+          ...focusedTask,
+          name: taskName || focusedTask.name,
+          description: taskDescription || focusedTask.description,
+          startDate: startDate || focusedTask.startDate,
+          endDate: endDate || focusedTask.endDate
+        };
+        updateTask(focusedTask.id, updatedTask);
+        setIsEditMode(false);
+      }
+    };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -79,20 +93,7 @@ export default function TaskDetails() {
           {/* save changes */}
           <Button
             variant="contained"
-            onClick={() => {
-              updateTask(focusedTask.id, {
-                id: focusedTask?.id,
-                name: taskName,
-                description: taskDescription,
-                taskNumber: focusedTask?.taskNumber,
-                storyPoint: focusedTask?.storyPoint,
-                workflowStatus: focusedTask?.workflowStatus,
-                assignedTo: focusedTask?.assignedTo,
-                startDate: startDate,
-                endDate: endDate,
-              });
-              setIsEditMode(false);
-            }}
+            onClick={handleSaveChanges}
           >
             Save Changes
           </Button>
