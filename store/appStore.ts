@@ -10,6 +10,7 @@ interface AppState {
   filteredTasks: Task[];
   setUsers: (users: User[]) => void;
   setTasks: (tasks: Task[]) => void;
+  setFilteredTasks: (tasks: Task[]) => void;
   setFocusedTask: (task: Task | null) => void;
   addTask: (task: Task) => void;
   updateTask: (taskId: string, updatedTask: Task) => void;
@@ -26,6 +27,7 @@ export const useAppStore = create<AppState>()(
       filteredTasks: [],
       setUsers: (users) => set(() => ({ users })),
       setTasks: (tasks) => set(() => ({ tasks })),
+      setFilteredTasks: (filteredTasks) => set(() => ({ filteredTasks })),
       setFocusedTask: (task) => set(() => ({ focusedTask: task })),
       addTask: (task: Task) => set((state) => ({ filteredTasks: [...state.filteredTasks, task] })),
       updateTask: (taskId: string, updatedTask: Task) =>
@@ -65,10 +67,14 @@ export const useAppStore = create<AppState>()(
       partialize: (state) => ({ filteredTasks: state.filteredTasks, users: state.users }),
       merge: (persistedState, currentState) => ({
         ...currentState,
-        focusedTask: persistedState?.tasks[0] || taskList[0],
-        filteredTasks: persistedState?.filteredTasks || taskList,
-        tasks: persistedState?.tasks || taskList,
-        users: persistedState?.users || userList,
+        focusedTask:
+          persistedState?.focusedTask || taskList[0], // Varsayılan görev
+        filteredTasks:
+          persistedState?.filteredTasks?.length > 0
+            ? persistedState.filteredTasks
+            : taskList, // Varsayılan liste
+        tasks: persistedState?.tasks || taskList, // Varsayılan tüm görevler
+        users: persistedState?.users || userList, // Varsayılan kullanıcılar
       }),
     }
   )
