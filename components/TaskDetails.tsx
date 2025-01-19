@@ -76,7 +76,7 @@ export default function TaskDetails() {
           />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              label="Select Date"
+              label="Start Date"
               format='DD.MM.YYYY'
               onChange={(newValue) => handleStartDate(newValue)}
               renderInput={(params) => <TextField {...params} />}
@@ -84,7 +84,7 @@ export default function TaskDetails() {
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              label="Select Date"
+              label="End Date"
               format='DD.MM.YYYY'
               onChange={(newValue) => handleEndDate(newValue)}
               renderInput={(params) => <TextField {...params} />}
